@@ -15,20 +15,22 @@ IBCS_CFLAGS += -D_KSL_IBCS_US
 # Everything is built in $(ROOT_DIR)/build.
 #
 ROOT_DIR	:= $(if $(dir $(lastword $(MAKEFILE_LIST))), $(patsubst %/, %, $(dir $(lastword $(MAKEFILE_LIST)))), .)
+
 BUILD_DIR	:= $(ROOT_DIR)/build
 BUILD_TEST_DIR	:= $(BUILD_DIR)/tests
 
-INCLUDES	?=	-I$(ROOT_DIR)/include
+INCLUDES	+=	-I$(ROOT_DIR)/include
 GDBMAP		?=	-ffile-prefix-map=.=./$(COMPONENT_NAME) -ffile-prefix-map=../include/=include/  
 
-CFLAGS_OPT	?=	-O2 -fno-builtin -ffreestanding
+CFLAGS_OPT	+=	-O2 -fno-builtin -ffreestanding
 CFLAGS_DEBUG	?=	-g
 CFLAGS_ARCH	?=	-m32
 
-CFLAGS_WARNINGS	?=	-Wall -Wextra -Wno-unused-parameter -Wno-sign-compare -Wduplicated-cond -Wlogical-op -Wnull-dereference -Wdouble-promotion -Wshadow
-CFLAGS_ERROR	?=	-Werror
+CFLAGS_WARNINGS	+=	-Wall -Wextra -Wno-unused-parameter -Wno-sign-compare -Wduplicated-cond -Wlogical-op -Wnull-dereference -Wdouble-promotion -Wshadow
+CFLAGS_ERROR	+=	-Werror
+CFLAGS_EXTRA	+=  -fcommon
 
-CFLAGS		?=	$(INCLUDES) $(CFLAGS_DEBUG) $(CFLAGS_OPT) $(CFLAGS_WARNINGS) $(CFLAGS_ERROR) $(CFLAGS_ARCH) $(CFLAGS_DEFINES) $(IBCS_CFLAGS) $(CFLAGS_EXTRA) $(GDBMAP)
+CFLAGS		+=	$(INCLUDES) $(CFLAGS_DEBUG) $(CFLAGS_OPT) $(CFLAGS_WARNINGS) $(CFLAGS_ERROR) $(CFLAGS_ARCH) $(CFLAGS_DEFINES) $(IBCS_CFLAGS) $(CFLAGS_EXTRA) $(GDBMAP)
 
 #
 # The -Wl,-Ttext=0xbf000000 asks Linux to load the program at that address.
@@ -40,7 +42,7 @@ LDFLAGS_ADDR	?=	-Wl,-Ttext=0xbf000000
 LDFLAGS_BUILDID	?=	-Wl,--build-id=none
 LDFLAGS_LIBS	?=	-lgcc -nostdlib
 LDFLAGS_STATIC	?=	-static
-LDFLAGS		?= 	$(LDFLAGS_LIBS) $(LDFLAGS_BUILDID) $(LDFLAGS_ADDR) $(LDFLAGS_STATIC)
+LDFLAGS		+= 	$(LDFLAGS_LIBS) $(LDFLAGS_BUILDID) $(LDFLAGS_ADDR) $(LDFLAGS_STATIC)
 
 #
 # C files can contain their own unit tests which are compiled in when
