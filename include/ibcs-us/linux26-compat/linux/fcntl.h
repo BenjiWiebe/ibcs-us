@@ -15,6 +15,8 @@
 
 #define	_FCNTL_H			/* We don't want the libc fcntl.h */
 #define __USE_LARGEFILE64
+#define AT_FDCWD	-100
+#define AT_EACCESS	0x200
 #include <bits/fcntl.h>
 #include <bits/fcntl-linux.h>
 
