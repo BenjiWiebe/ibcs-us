@@ -28,7 +28,7 @@ CFLAGS_ARCH	?=	-m32
 
 CFLAGS_WARNINGS	+=	-Wall -Wextra -Wno-unused-parameter -Wno-sign-compare -Wduplicated-cond -Wlogical-op -Wnull-dereference -Wdouble-promotion -Wshadow
 CFLAGS_ERROR	+=	-Werror -Wno-error=stringop-overflow
-CFLAGS_EXTRA	+=  -fcommon
+CFLAGS_EXTRA	+=  -fcommon -fpic
 
 CFLAGS		+=	$(INCLUDES) $(CFLAGS_DEBUG) $(CFLAGS_OPT) $(CFLAGS_WARNINGS) $(CFLAGS_ERROR) $(CFLAGS_ARCH) $(CFLAGS_DEFINES) $(IBCS_CFLAGS) $(CFLAGS_EXTRA) $(GDBMAP)
 
