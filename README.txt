@@ -21,9 +21,11 @@ ibcs-us
 Dependencies
 ------------
 
-  gcc (32 or 64bit), the glibc-i386 headers (the libc6-dev-i386
+  gcc (32 or 64bit), the glibc-i386 headers (the libc-dev:i386
   package on Debian) and the linux-libc headers for i386 (the
   linux-libc-dev:i386 package on Debian).
+  Installing gcc-multilib on Debian/Ubuntu is the easy way to
+  get all required dependencies.
 
 
 Building & Installing
